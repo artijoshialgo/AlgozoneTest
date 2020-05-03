@@ -28,13 +28,6 @@ node {
 	def sourceOrgSecretId = props['sourceOrgSecretId'];
 	def sourceOrgLoginUrl = props['sourceOrgLoginUrl'];
 	
-	def packageVersionId = ''
-	def existingPackageId = ''
-	
-    println isCreatePackage
-	println isCreateVersion
-	
-	def devhubOrdId=''
 	  
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
