@@ -27,7 +27,7 @@ node {
 	def sourceOrgUserName = props['sourceOrgUserName'];
 	def sourceOrgSecretId = props['sourceOrgSecretId'];
 	def sourceOrgLoginUrl = props['sourceOrgLoginUrl'];
-	
+	def DEPLOYDIR = props['DEPLOYDIR'];
 	  
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
