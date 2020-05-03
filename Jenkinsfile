@@ -22,7 +22,7 @@ node {
     def toolbelt = tool 'SFDX'
     def toolbelt1 = tool 'SSL'
 	
-	def props = readProperties file:'C:\Program Files (x86)\Jenkins\workspace\algotest\pipeline.properties';
+	def props = readProperties file:'C:/Program Files (x86)/Jenkins/workspace/algotest/pipeline.properties';
 	
 	def sourceOrgUserName = props['sourceOrgUserName'];
 	def sourceOrgSecretId = props['sourceOrgSecretId'];
