@@ -58,9 +58,9 @@ node {
 		
 		stage('Deploy Code') {
 		
-			println "${toolbelt}/sfdx force:mdapi:deploy --wait 10 -d ${DEPLOYDIR} -u ${sourceOrgUserName}"
+			println "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
 			
-            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 -d ${DEPLOYDIR} -u ${sourceOrgUserName}"
+            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
 		    
 			println rc
 			def jsonSlurper = new JsonSlurperClassic()
