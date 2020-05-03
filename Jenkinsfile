@@ -22,7 +22,7 @@ node {
     def toolbelt = tool 'SFDX'
     def toolbelt1 = tool 'SSL'
 	
-	def props = readProperties file:'pipeline.properties';
+	def props = readProperties file:'pipeline';
 	
 	def sourceOrgUserName = props['sourceOrgUserName'];
 	def sourceOrgSecretId = props['sourceOrgSecretId'];
