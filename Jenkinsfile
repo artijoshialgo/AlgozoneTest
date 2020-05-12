@@ -1,5 +1,5 @@
 #!groovy
-import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 node {
 
@@ -47,7 +47,7 @@ node {
             rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --json --clientid ${sourceOrgSecretId} --username ${sourceOrgUserName} --jwtkeyfile ${toolbelt1}/server.key  --setdefaultdevhubusername --instanceurl ${sourceOrgLoginUrl}"
 			
 			println rc
-			def jsonSlurper = new JsonSlurperClassic()
+			def jsonSlurper = new JsonSlurper()
 			def robj = jsonSlurper.parseText(rc)
 
             if (robj.status != 0) {
@@ -62,10 +62,10 @@ node {
 		
 			println "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
 			
-            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
+            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName} --json"
 		    
 			println rc
-			def jsonSlurper = new JsonSlurperClassic()
+			def jsonSlurper = new JsonSlurper()
 			def robj = jsonSlurper.parseText(rc)
 
             if (robj.status != 0) {
