@@ -71,7 +71,7 @@ node {
             if (robj.status != 0) {
                 error 'Salesforce deployment failed.'
             }else {
-                error 'Salesforce deployment is successful.'
+                println 'Salesforce deployment is successful.'
             }
 			
         }
