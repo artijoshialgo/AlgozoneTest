@@ -6,6 +6,6 @@ public with sharing class AccountController {
   public void display(){
     
     //test build
-    System.debug('queryString');
+    System.debug('main string');
   }
 }
