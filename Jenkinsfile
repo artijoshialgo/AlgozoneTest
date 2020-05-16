@@ -62,7 +62,7 @@ node {
 		
 			println "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
 			
-            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName} --json"
+            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:source:deploy -w 10 -p ${DEPLOYDIR} -u ${sourceOrgUserName} --json"
 		    
 			println rc
 			def jsonSlurper = new JsonSlurper()
