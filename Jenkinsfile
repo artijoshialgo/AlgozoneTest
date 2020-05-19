@@ -34,6 +34,15 @@ node {
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
         checkout scm
+	def lastSuccessfulCommit = getLastSuccessfulCommit()
+        def currentCommit = commitHashForBuild( currentBuild.rawBuild )
+      if (lastSuccessfulCommit) {
+	commits = sh(
+	  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
+	  returnStdout: true
+	).split('\n')
+	println "Commits are: $commits"
+      }
     }
 	
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
