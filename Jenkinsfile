@@ -1,5 +1,5 @@
 #!groovy
-import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 node {
 
@@ -22,7 +22,9 @@ node {
     def toolbelt = tool 'SFDX'
     def toolbelt1 = tool 'SSL'
 	
-	def props = readProperties file:'C:/Program Files (x86)/Jenkins/workspace/algotest/pipeline.properties';
+	
+	
+	def props = readProperties file:'pipeline.properties';
 	
 	def sourceOrgUserName = props['sourceOrgUserName'];
 	def sourceOrgSecretId = props['sourceOrgSecretId'];
@@ -45,7 +47,7 @@ node {
             rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --json --clientid ${sourceOrgSecretId} --username ${sourceOrgUserName} --jwtkeyfile ${toolbelt1}/server.key  --setdefaultdevhubusername --instanceurl ${sourceOrgLoginUrl}"
 			
 			println rc
-			def jsonSlurper = new JsonSlurperClassic()
+			def jsonSlurper = new JsonSlurper()
 			def robj = jsonSlurper.parseText(rc)
 
             if (robj.status != 0) {
@@ -60,16 +62,16 @@ node {
 		
 			println "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
 			
-            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${sourceOrgUserName}"
+            rc = sh returnStdout: true, script: "${toolbelt}/sfdx force:source:deploy -w 10 -p ${DEPLOYDIR} -u ${sourceOrgUserName} --json"
 		    
 			println rc
-			def jsonSlurper = new JsonSlurperClassic()
+			def jsonSlurper = new JsonSlurper()
 			def robj = jsonSlurper.parseText(rc)
 
             if (robj.status != 0) {
                 error 'Salesforce deployment failed.'
             }else {
-                error 'Salesforce deployment is successful.'
+                println 'Salesforce deployment is successful.'
             }
 			
         }
